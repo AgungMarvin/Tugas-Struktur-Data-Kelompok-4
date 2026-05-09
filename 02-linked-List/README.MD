@@ -1,0 +1,1 @@
+Struktur Data Linked List
