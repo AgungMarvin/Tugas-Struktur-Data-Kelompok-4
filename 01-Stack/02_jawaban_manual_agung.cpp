@@ -1,55 +1,28 @@
 #include <iostream>
 #include <stack>
-#include <string>
-
 using namespace std;
 
-/**
- * Nama: AgungMarvin
- * Tugas Bagian 4: Code Sendiri (Manual Solution)
- * Soal: Valid Parentheses (C++)
- */
-
-bool isValid(string s) {
-    stack<char> tumpukan;
-
-    for (char karakter : s) {
-        // Jika ketemu kurung buka, masukkan ke tumpukan (push)
-        if (karakter == '(' || karakter == '{' || karakter == '[') {
-            tumpukan.push(karakter);
-        } 
-        else {
-            // Jika ada kurung tutup tapi tumpukan kosong, berarti salah
-            if (tumpukan.empty()) {
-                return false;
-            }
-
-            char atas = tumpukan.top(); // Lihat elemen paling atas
-            
-            // Cek apakah pasangannya cocok secara manual
-            if (karakter == ')' && atas == '(') {
-                tumpukan.pop();
-            } else if (karakter == '}' && atas == '{') {
-                tumpukan.pop();
-            } else if (karakter == ']' && atas == '[') {
-                tumpukan.pop();
+// Nama: Agung Marvin
+bool cekValid(string s) {
+    stack<char> st;
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+            st.push(s[i]);
+        } else {
+            if (st.empty()) return false;
+            char top = st.top();
+            if ((s[i] == ')' && top == '(') || (s[i] == '}' && top == '{') || (s[i] == ']' && top == '[')) {
+                st.pop();
             } else {
-                // Jika tidak ada yang cocok, berarti tidak valid
                 return false;
             }
         }
     }
-
-    // Jika di akhir tumpukan kosong, berarti semua punya pasangan
-    return tumpukan.empty();
+    return st.empty();
 }
 
 int main() {
-    string input = "()[]{}";
-    if (isValid(input)) {
-        cout << "Hasil: Valid (True)" << endl;
-    } else {
-        cout << "Hasil: Tidak Valid (False)" << endl;
-    }
+    string s = "()[]{}";
+    cout << cekValid(s);
     return 0;
 }
