@@ -1,1 +1,1 @@
-Struktur Data Stack/Queue
+Struktur Data Graph
