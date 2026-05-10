@@ -1,21 +1,15 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
-queue<int> q;
+struct Node {
+    int val;
+    Node *left, *right;
+};
 
-void push(int x) {
-    q.push(x);
-    for (int i = 0; i < q.size() - 1; i++) {
-        q.push(q.front());
-        q.pop();
-    }
-}
-
-void pop() {
-    q.pop();
-}
-
-int top() {
-    return q.front();
+int hitungDalam(Node* root) {
+    if (root == NULL) return 0;
+    int kiri = hitungDalam(root->left);
+    int kanan = hitungDalam(root->right);
+    if (kiri > kanan) return kiri + 1;
+    else return kanan + 1;
 }
